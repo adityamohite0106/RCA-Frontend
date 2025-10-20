@@ -29,7 +29,7 @@ function App() {
   }, [ws]);
 
   const connect = () => {
-    const websocket = new WebSocket('ws://localhost:3000');
+const websocket = new WebSocket('wss://rca-backend-pho0.onrender.com');
     
     websocket.onopen = () => {
       websocket.send(JSON.stringify({ type: 'join', userId }));

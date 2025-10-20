@@ -34,10 +34,11 @@
   word-wrap: break-word;
   font-size: 15px;
   line-height: 1.4;
+  transition: background 0.3s ease;
 }
 
 .message-sent .message-bubble {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #D97706 0%, #C2410C 100%);
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -46,6 +47,11 @@
   background: #e5e7eb;
   color: #111827;
   border-bottom-left-radius: 4px;
+}
+
+.message.dark .message-received .message-bubble {
+  background: #334155;
+  color: #f1f5f9;
 }
 
 .message-system .message-bubble {
@@ -57,4 +63,9 @@
   padding: 8px 12px;
   max-width: 90%;
   text-align: center;
+}
+
+.message.dark .message-system .message-bubble {
+  background: #422006;
+  color: #fde68a;
 }

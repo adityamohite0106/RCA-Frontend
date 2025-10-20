@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import Message from './Message';
 import './ChatArea.css';
 
-function ChatArea({ messages, status, partnerTyping, onStart, onNext, onStop }) {
+function ChatArea({ messages, status, partnerTyping, onStart, onNext, onStop, theme }) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ function ChatArea({ messages, status, partnerTyping, onStart, onNext, onStop }) 
   }, [messages, partnerTyping]);
 
   return (
-    <div className="chat-area">
+    <div className={`chat-area ${theme}`}>
       {status === 'disconnected' && messages.length === 0 ? (
         <div className="empty-state">
           <div className="empty-icon">💬</div>
@@ -24,7 +24,7 @@ function ChatArea({ messages, status, partnerTyping, onStart, onNext, onStop }) 
         <>
           <div className="messages-container">
             {messages.map((msg, index) => (
-              <Message key={index} message={msg} />
+              <Message key={index} message={msg} theme={theme} />
             ))}
             
             {partnerTyping && (

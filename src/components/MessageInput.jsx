@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './MessageInput.css';
 
-function MessageInput({ onSend, onTyping, disabled }) {
+function MessageInput({ onSend, onTyping, disabled, theme }) {
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e) => {
@@ -18,7 +18,7 @@ function MessageInput({ onSend, onTyping, disabled }) {
   };
 
   return (
-    <form className="message-input" onSubmit={handleSubmit}>
+    <form className={`message-input ${theme}`} onSubmit={handleSubmit}>
       <input
         type="text"
         className="message-input-field"

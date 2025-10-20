@@ -5,6 +5,8 @@ import MessageInput from './components/MessageInput';
 import './App.css';
 
 function App() {
+  const [theme, setTheme] = useState('light');
+
   const [userId] = useState(() => {
     let id = sessionStorage.getItem('userId');
     if (!id) {
@@ -21,6 +23,10 @@ function App() {
   const typingTimeoutRef = useRef(null);
 
   useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+  useEffect(() => {
     return () => {
       if (ws) {
         ws.close();
@@ -28,8 +34,12 @@ function App() {
     };
   }, [ws]);
 
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
   const connect = () => {
-const websocket = new WebSocket('wss://rca-backend-pho0.onrender.com');
+    const websocket = new WebSocket('wss://rca-backend-pho0.onrender.com');
     
     websocket.onopen = () => {
       websocket.send(JSON.stringify({ type: 'join', userId }));
@@ -108,8 +118,12 @@ const websocket = new WebSocket('wss://rca-backend-pho0.onrender.com');
 
   return (
     <div className="app">
-      <div className="chat-container">
-        <Header status={status} />
+      <div className={`chat-container ${theme}`}>
+        <Header 
+          status={status} 
+          theme={theme}
+          onThemeToggle={toggleTheme}
+        />
         
         <ChatArea 
           messages={messages} 
@@ -118,12 +132,14 @@ const websocket = new WebSocket('wss://rca-backend-pho0.onrender.com');
           onStart={connect}
           onNext={findNext}
           onStop={disconnect}
+          theme={theme}
         />
         
         <MessageInput 
           onSend={sendMessage}
           onTyping={handleTyping}
           disabled={status !== 'connected'}
+          theme={theme}
         />
       </div>
     </div>

@@ -19,12 +19,22 @@ function Header({ status }) {
 
   return (
     <div className="header">
-      <h1 className="header-title">Random Chat</h1>
+             <h1 className="header-title">
+        <img src="./logo.png" alt="OopsChat Logo" style={{ height:"85px" }} />
+       </h1>
       <div className="status-container">
+
+       
         <div 
+        
           className="status-dot" 
           style={{ background: getStatusColor() }}
-        ></div>
+        >
+
+
+        </div>
+
+        
         <span className="status-text">{getStatusText()}</span>
       </div>
     </div>
